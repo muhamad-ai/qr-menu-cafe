@@ -41,10 +41,23 @@
   function populateCategorySelects() {
     const sorted = categories.slice().sort((a, b) => a.sort_order - b.sort_order);
 
+    // Rebuilding innerHTML resets the selected option, so remember what the
+    // admin had filtered/chosen and restore it afterwards (falls back to
+    // "all" if that category no longer exists, e.g. it was just deleted).
+    const previousFilter = filterSelect.value;
+    const previousCategory = categorySelect.value;
+
     filterSelect.innerHTML = '<option value="all">هەموو بەشەکان</option>' +
       sorted.map((c) => `<option value="${c.id}">${escapeHtml(c.name_ku)}</option>`).join('');
 
     categorySelect.innerHTML = sorted.map((c) => `<option value="${c.id}">${escapeHtml(c.name_ku)}</option>`).join('');
+
+    if (previousFilter && [...filterSelect.options].some((o) => o.value === previousFilter)) {
+      filterSelect.value = previousFilter;
+    }
+    if (previousCategory && [...categorySelect.options].some((o) => o.value === previousCategory)) {
+      categorySelect.value = previousCategory;
+    }
   }
 
   function openModal(item) {
