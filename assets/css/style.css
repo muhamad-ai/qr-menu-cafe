@@ -51,6 +51,21 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
+  /* This is a look-only menu — no text should be selectable, and long-
+     pressing an item/photo shouldn't pop up iOS's copy/look-up/save menu. */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* The search box is the one exception: typing needs normal cursor/select
+   behaviour to work (backspace-a-word, select-all, etc). */
+.menu-search {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
 }
 
 /* Café photo (set via JS as the --menu-bg-image custom property) painted on
@@ -165,10 +180,17 @@ a {
 }
 
 .menu-hero__name {
-  font-size: 1.7rem;
+  /* A distinct elegant serif face for the brand name only — the rest of
+     the UI stays on Vazirmatn for readability. Noto Naskh Arabic is part
+     of Google's Noto family, built specifically for complete script
+     coverage (including the extra Kurdish Sorani letters ڕ ڵ ۆ ڤ ێ ە),
+     so it won't silently drop glyphs the way some decorative Arabic
+     display fonts do. Vazirmatn stays as a fallback regardless. */
+  font-family: 'Noto Naskh Arabic', 'Vazirmatn', 'Noto Kufi Arabic', 'Segoe UI', Tahoma, system-ui, sans-serif;
+  font-size: 2rem;
   font-weight: 700;
   margin: 4px 0 0;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   opacity: 0;
   animation: hero-fade-up 0.8s ease 0.4s forwards;
@@ -259,23 +281,25 @@ a {
   position: sticky;
   top: 0;
   z-index: 10;
-  /* A frosted-glass strip: fairly translucent, but a strong blur keeps
-     search text and tabs sharp and readable over any part of the photo. */
-  background: rgba(255, 255, 255, 0.62);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  /* Same real-glass treatment as the item cards below: low-opacity tint +
+     strong blur/saturate so the photo reads straight through, plus a
+     soft inset highlight along the top edge. */
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(10px) saturate(190%);
+  -webkit-backdrop-filter: blur(10px) saturate(190%);
   padding: 12px 16px;
-  border-bottom: 1px solid var(--border-soft);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .menu-search {
   width: 100%;
   padding: 11px 14px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-soft);
-  background: rgba(250, 247, 242, 0.7);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(10px) saturate(190%);
+  -webkit-backdrop-filter: blur(10px) saturate(190%);
   font-size: 0.95rem;
   color: var(--text-main);
 }
@@ -300,11 +324,12 @@ a {
 
 .category-tabs button {
   flex: 0 0 auto;
-  border: 1px solid var(--border-soft);
-  background: rgba(250, 247, 242, 0.7);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(10px) saturate(190%);
+  -webkit-backdrop-filter: blur(10px) saturate(190%);
   color: var(--text-main);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
   padding: 8px 16px;
   border-radius: 999px;
   font-size: 0.85rem;
@@ -372,9 +397,9 @@ a {
      plus a soft inset highlight along the top edge for that glass-panel
      look. The blur keeps whatever busy photo detail is behind it smoothed
      out, so name/price/description stay easily readable. */
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(10px) saturate(190%);
+  -webkit-backdrop-filter: blur(10px) saturate(190%);
   border-radius: var(--radius-lg);
   padding: 12px;
   box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -384,7 +409,7 @@ a {
 }
 
 .menu-item:hover {
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.38);
 }
 
 .menu-item:active {
@@ -442,6 +467,10 @@ a {
   font-weight: 700;
   font-size: 1rem;
   color: var(--text-main);
+  /* Now that the card itself is much more see-through, a faint light
+     halo keeps the text readable no matter what part of the photo (or
+     how busy it is) happens to sit behind it. */
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
 }
 
 .menu-item__price {
@@ -449,12 +478,14 @@ a {
   font-size: 0.95rem;
   color: var(--theme-primary);
   white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
 }
 
 .menu-item__desc {
   font-size: 0.85rem;
   color: var(--text-muted);
   margin: 0;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
