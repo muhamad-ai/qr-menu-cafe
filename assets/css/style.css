@@ -38,11 +38,29 @@ body {
 }
 
 body {
+  position: relative;
   font-family: 'Segoe UI', Tahoma, 'Noto Sans Arabic', 'Noto Kufi Arabic', system-ui, sans-serif;
-  background: var(--surface-muted);
+  background-color: var(--surface-muted);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
+}
+
+/* Café photo (set inline via JS on <body>) stays fixed behind the whole
+   page as the visitor scrolls. This cream wash sits between the photo and
+   the page content so text/cards (below the hero) stay easily readable
+   while the photo is still visible in the negative space around them. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(250, 247, 242, 0.86);
+  z-index: -1;
+  pointer-events: none;
 }
 
 img {
@@ -84,9 +102,10 @@ a {
   justify-content: flex-end;
   padding: 24px 20px 28px;
   color: #fff;
-  background-color: var(--theme-primary);
-  background-size: cover;
-  background-position: center;
+  /* No background of its own: the café photo lives on <body> (fixed) and
+     shows straight through here; ::before below darkens it for text
+     contrast. If no photo is set, body falls back to a solid cream color
+     and this dark gradient still reads fine over it. */
   overflow: hidden;
 }
 

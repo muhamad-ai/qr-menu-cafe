@@ -104,7 +104,9 @@
     }
 
     if (s.background_url) {
-      els.hero.style.backgroundImage = `url('${s.background_url}')`;
+      // Applied to <body> (fixed, full-page) rather than just the hero, so
+      // the café photo stays visible behind the whole menu while scrolling.
+      document.body.style.backgroundImage = `url('${s.background_url}')`;
     }
   }
 
