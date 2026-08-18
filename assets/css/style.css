@@ -283,7 +283,12 @@ a {
 .menu-item {
   display: flex;
   gap: 12px;
-  background: var(--surface);
+  /* Softly translucent + blurred, like the toolbar, so the café photo
+     shows through faintly instead of the cards reading as flat opaque
+     white boxes. Still opaque enough to keep text easily readable. */
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: var(--radius-lg);
   padding: 12px;
   box-shadow: var(--shadow-card);
