@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Overview — Admin Dashboard</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="../assets/css/admin.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-area">
+      <header class="topbar">
+        <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+        <h1>Overview</h1>
+        <div></div>
+      </header>
+
+      <div class="page">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-card__value" id="statCategories">–</div>
+            <div class="stat-card__label">Categories</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__value" id="statItems">–</div>
+            <div class="stat-card__label">Total items</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__value" id="statAvailable">–</div>
+            <div class="stat-card__label">Available</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__value" id="statUnavailable">–</div>
+            <div class="stat-card__label">Unavailable</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel__header">
+            <h2>Quick links</h2>
+          </div>
+          <div class="data-list">
+            <a class="data-row" href="categories.html">
+              <div class="data-row__main">
+                <div class="data-row__title">Manage categories</div>
+                <div class="data-row__meta">Add, edit, reorder or remove menu categories</div>
+              </div>
+            </a>
+            <a class="data-row" href="items.html">
+              <div class="data-row__main">
+                <div class="data-row__title">Manage menu items</div>
+                <div class="data-row__meta">Add dishes/drinks, prices, photos, availability</div>
+              </div>
+            </a>
+            <a class="data-row" href="settings.html">
+              <div class="data-row__main">
+                <div class="data-row__title">Café settings</div>
+                <div class="data-row__meta">Name, logo, background, theme colors, currency</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="../assets/js/config.js" defer></script>
+  <script src="../assets/js/supabaseClient.js" defer></script>
+  <script src="../assets/js/admin-common.js" defer></script>
+  <script src="../assets/js/admin-dashboard.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Menu</title>
+  <meta name="description" content="Digital café menu — browse categories, dishes and prices." />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Café Menu" />
+  <meta property="og:description" content="Browse our menu and prices." />
+
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <a href="#menu-content" class="skip-link">Skip to menu</a>
+
+  <header class="menu-hero" id="menuHero" role="banner">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="ku" aria-pressed="true">KU</button>
+      <button type="button" data-lang="ar" aria-pressed="false">AR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <div class="menu-hero__content">
+      <img class="menu-hero__logo" id="cafeLogo" src="" alt="" hidden />
+      <h1 class="menu-hero__name" id="cafeName">&nbsp;</h1>
+      <p class="menu-hero__tagline" id="cafeTagline" hidden></p>
+    </div>
+  </header>
+
+  <div class="menu-toolbar">
+    <input
+      type="search"
+      class="menu-search"
+      id="menuSearch"
+      autocomplete="off"
+      aria-label="Search menu"
+    />
+    <nav class="category-tabs" id="categoryTabs" aria-label="Categories"></nav>
+  </div>
+
+  <main id="menu-content" class="menu-content">
+    <div id="loadingState" class="state-block">
+      <div class="spinner" role="status" aria-label="Loading"></div>
+      <p id="loadingText">Loading menu...</p>
+    </div>
+
+    <div id="errorState" class="state-block" hidden>
+      <p id="errorText"></p>
+      <button type="button" id="retryBtn"></button>
+    </div>
+
+    <div id="emptyState" class="state-block" hidden>
+      <p id="emptyText"></p>
+    </div>
+
+    <div id="categoriesContainer" hidden></div>
+  </main>
+
+  <footer class="menu-footer">
+    <span id="footerText"></span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="assets/js/config.js" defer onerror="console.error('Missing assets/js/config.js — copy it from config.example.js')"></script>
+  <script src="assets/js/supabaseClient.js" defer></script>
+  <script src="assets/js/i18n.js" defer></script>
+  <script src="assets/js/menu.js" defer></script>
+</body>
+</html>

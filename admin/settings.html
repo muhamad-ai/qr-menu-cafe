@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Settings — Admin Dashboard</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="../assets/css/admin.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-area">
+      <header class="topbar">
+        <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+        <h1>Settings</h1>
+        <div></div>
+      </header>
+
+      <div class="page">
+        <form id="settingsForm" novalidate>
+          <div class="panel">
+            <div class="panel__header"><h2>Café name</h2></div>
+            <div class="field">
+              <label for="cafeNameKu">Kurdish *</label>
+              <input type="text" id="cafeNameKu" required />
+              <div class="field-error" id="cafeNameKuError"></div>
+            </div>
+            <div class="field">
+              <label for="cafeNameAr">Arabic</label>
+              <input type="text" id="cafeNameAr" />
+            </div>
+            <div class="field">
+              <label for="cafeNameEn">English</label>
+              <input type="text" id="cafeNameEn" />
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel__header"><h2>Branding</h2></div>
+            <div class="field">
+              <label for="logoInput">Logo</label>
+              <input type="file" id="logoInput" accept="image/*" />
+              <img id="logoPreview" class="image-preview" hidden alt="Logo preview" />
+            </div>
+            <div class="field">
+              <label for="backgroundInput">Background image</label>
+              <input type="file" id="backgroundInput" accept="image/*" />
+              <img id="backgroundPreview" class="image-preview" hidden alt="Background preview" />
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel__header"><h2>Theme colors</h2></div>
+            <div class="field">
+              <label for="themePrimary">Primary color</label>
+              <input type="color" id="themePrimary" value="#1f1410" />
+            </div>
+            <div class="field">
+              <label for="themeSecondary">Accent color</label>
+              <input type="color" id="themeSecondary" value="#c9a15a" />
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel__header"><h2>Currency & language</h2></div>
+            <div class="field">
+              <label for="currencyCode">Currency code (e.g. IQD, USD)</label>
+              <input type="text" id="currencyCode" maxlength="8" />
+            </div>
+            <div class="field">
+              <label for="currencySymbol">Currency symbol shown on menu (e.g. د.ع, $)</label>
+              <input type="text" id="currencySymbol" maxlength="8" />
+            </div>
+            <div class="field">
+              <label for="defaultLanguage">Default menu language</label>
+              <select id="defaultLanguage">
+                <option value="ku">Kurdish (سۆرانی)</option>
+                <option value="ar">Arabic (العربية)</option>
+                <option value="en">English</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn" id="settingsSaveBtn">Save settings</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="../assets/js/config.js" defer></script>
+  <script src="../assets/js/supabaseClient.js" defer></script>
+  <script src="../assets/js/admin-common.js" defer></script>
+  <script src="../assets/js/admin-settings.js" defer></script>
+</body>
+</html>

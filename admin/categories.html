@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Categories — Admin Dashboard</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="../assets/css/admin.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-area">
+      <header class="topbar">
+        <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+        <h1>Categories</h1>
+        <div></div>
+      </header>
+
+      <div class="page">
+        <div class="panel">
+          <div class="panel__header">
+            <h2>All categories</h2>
+            <button type="button" class="btn" id="addCategoryBtn">+ Add category</button>
+          </div>
+          <div id="categoriesList" class="data-list"></div>
+          <div id="categoriesEmpty" class="empty-state" hidden>No categories yet. Add your first one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit modal -->
+  <div class="modal-backdrop" id="categoryModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="categoryModalTitle">
+      <h2 id="categoryModalTitle">Add category</h2>
+      <form id="categoryForm" novalidate>
+        <input type="hidden" id="categoryId" />
+        <div class="field">
+          <label for="nameKu">Name (Kurdish) *</label>
+          <input type="text" id="nameKu" required />
+          <div class="field-error" id="nameKuError"></div>
+        </div>
+        <div class="field">
+          <label for="nameAr">Name (Arabic)</label>
+          <input type="text" id="nameAr" />
+        </div>
+        <div class="field">
+          <label for="nameEn">Name (English)</label>
+          <input type="text" id="nameEn" />
+        </div>
+        <div class="field">
+          <label><input type="checkbox" id="isActive" checked /> Visible on public menu</label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="categoryCancelBtn">Cancel</button>
+          <button type="submit" class="btn" id="categorySaveBtn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="../assets/js/config.js" defer></script>
+  <script src="../assets/js/supabaseClient.js" defer></script>
+  <script src="../assets/js/admin-common.js" defer></script>
+  <script src="../assets/js/admin-categories.js" defer></script>
+</body>
+</html>
