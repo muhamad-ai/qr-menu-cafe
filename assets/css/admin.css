@@ -29,7 +29,7 @@
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, 'Noto Sans Arabic', system-ui, sans-serif;
+  font-family: 'Vazirmatn', 'Noto Kufi Arabic', 'Segoe UI', Tahoma, system-ui, sans-serif;
   background: var(--a-bg);
   color: var(--a-text);
   min-height: 100vh;

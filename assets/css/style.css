@@ -39,7 +39,7 @@ body {
 
 body {
   position: relative;
-  font-family: 'Segoe UI', Tahoma, 'Noto Sans Arabic', 'Noto Kufi Arabic', system-ui, sans-serif;
+  font-family: 'Vazirmatn', 'Noto Kufi Arabic', 'Segoe UI', Tahoma, system-ui, sans-serif;
   background-color: var(--surface-muted);
   background-size: cover;
   background-position: center top;
@@ -51,14 +51,16 @@ body {
 }
 
 /* Café photo (set inline via JS on <body>) stays fixed behind the whole
-   page as the visitor scrolls. This cream wash sits between the photo and
+   page as the visitor scrolls. This light wash sits between the photo and
    the page content so text/cards (below the hero) stay easily readable
-   while the photo is still visible in the negative space around them. */
+   while the photo is still clearly visible in the negative space around
+   them — kept fairly low-opacity on purpose, otherwise the photo washes
+   out to looking like plain white on phone screens in bright light. */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: rgba(250, 247, 242, 0.86);
+  background: rgba(250, 247, 242, 0.35);
   z-index: -1;
   pointer-events: none;
 }
@@ -191,7 +193,7 @@ a {
   z-index: 10;
   /* Semi-transparent + blurred so the fixed café photo stays visible
      behind the search/category bar too, instead of being fully blocked. */
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 12px 16px;
@@ -203,7 +205,7 @@ a {
   padding: 11px 14px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-soft);
-  background: rgba(250, 247, 242, 0.75);
+  background: rgba(250, 247, 242, 0.85);
   font-size: 0.95rem;
   color: var(--text-main);
 }
@@ -229,7 +231,7 @@ a {
 .category-tabs button {
   flex: 0 0 auto;
   border: 1px solid var(--border-soft);
-  background: rgba(250, 247, 242, 0.75);
+  background: rgba(250, 247, 242, 0.85);
   color: var(--text-main);
   padding: 8px 16px;
   border-radius: 999px;
@@ -286,7 +288,7 @@ a {
   /* Softly translucent + blurred, like the toolbar, so the café photo
      shows through faintly instead of the cards reading as flat opaque
      white boxes. Still opaque enough to keep text easily readable. */
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: var(--radius-lg);
