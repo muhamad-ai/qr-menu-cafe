@@ -367,23 +367,24 @@ a {
 .menu-item {
   display: flex;
   gap: 12px;
-  /* Frosted glass, matching the toolbar/search/tabs/title-chip treatment,
-     so the café photo shows through behind every card instead of the
-     page reading as flat opaque white boxes. Still opaque enough to keep
-     item name/price/description easily readable. */
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  /* Real frosted glass rather than an almost-solid white card: low-opacity
+     tint + strong blur/saturate so the café photo genuinely reads through,
+     plus a soft inset highlight along the top edge for that glass-panel
+     look. The blur keeps whatever busy photo detail is behind it smoothed
+     out, so name/price/description stay easily readable. */
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   border-radius: var(--radius-lg);
   padding: 12px;
-  box-shadow: var(--shadow-card);
-  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
   transition: background 0.15s ease, transform 0.12s ease;
 }
 
 .menu-item:hover {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .menu-item:active {
