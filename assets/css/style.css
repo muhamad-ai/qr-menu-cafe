@@ -164,8 +164,8 @@ a {
 }
 
 .menu-hero__logo {
-  width: 112px;
-  height: 112px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid rgba(255, 255, 255, 0.85);
@@ -459,9 +459,9 @@ a {
      tinting the whole card. Keeps text sharp no matter how busy the
      photo is here, while the rest of the card (and the photo thumbnail)
      stays untouched. */
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px) saturate(150%);
+  -webkit-backdrop-filter: blur(8px) saturate(150%);
   border-radius: var(--radius-md);
   padding: 8px 10px;
 }
