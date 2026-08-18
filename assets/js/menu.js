@@ -104,9 +104,10 @@
     }
 
     if (s.background_url) {
-      // Applied to <body> (fixed, full-page) rather than just the hero, so
-      // the café photo stays visible behind the whole menu while scrolling.
-      document.body.style.backgroundImage = `url('${s.background_url}')`;
+      // Read by the body::before rule in style.css — a fixed-position
+      // layer behind the whole page, more reliable on mobile than
+      // background-attachment:fixed directly on <body>.
+      document.documentElement.style.setProperty('--menu-bg-image', `url('${s.background_url}')`);
     }
   }
 
