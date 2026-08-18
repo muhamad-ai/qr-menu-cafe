@@ -31,9 +31,12 @@
     searchTerm: '',
   };
 
-  function money(value, settings) {
+  function money(value, settings, lang) {
     const num = Number(value || 0);
     const formatted = num.toLocaleString(undefined, { maximumFractionDigits: 2 });
+    // English readers see the plain number with no currency symbol; Kurdish
+    // and Arabic keep the configured symbol (e.g. "د.ع").
+    if (lang === 'en') return formatted;
     const symbol = settings?.currency_symbol || settings?.currency_code || '';
     return `${formatted} ${symbol}`.trim();
   }
@@ -177,7 +180,7 @@
     name.textContent = localizedField(item, 'name', lang);
     const price = document.createElement('span');
     price.className = 'menu-item__price';
-    price.textContent = money(item.price, state.settings);
+    price.textContent = money(item.price, state.settings, lang);
     top.appendChild(name);
     top.appendChild(price);
     body.appendChild(top);
