@@ -41,7 +41,7 @@
   function populateCategorySelects() {
     const sorted = categories.slice().sort((a, b) => a.sort_order - b.sort_order);
 
-    filterSelect.innerHTML = '<option value="all">All categories</option>' +
+    filterSelect.innerHTML = '<option value="all">هەموو بەشەکان</option>' +
       sorted.map((c) => `<option value="${c.id}">${escapeHtml(c.name_ku)}</option>`).join('');
 
     categorySelect.innerHTML = sorted.map((c) => `<option value="${c.id}">${escapeHtml(c.name_ku)}</option>`).join('');
@@ -55,12 +55,12 @@
     existingImageUrl = null;
 
     if (categories.length === 0) {
-      Admin.toast('Create a category first.', 'error');
+      Admin.toast('سەرەتا بەشێک دروست بکە.', 'error');
       return;
     }
 
     if (item) {
-      modalTitle.textContent = 'Edit item';
+      modalTitle.textContent = 'دەستکاریکردنی خواردنەوە';
       idInput.value = item.id;
       categorySelect.value = item.category_id;
       nameKuInput.value = item.name_ku || '';
@@ -77,7 +77,7 @@
         imagePreview.hidden = false;
       }
     } else {
-      modalTitle.textContent = 'Add item';
+      modalTitle.textContent = 'زیادکردنی خواردنەوە';
       idInput.value = '';
       categorySelect.value = filterSelect.value !== 'all' ? filterSelect.value : categories[0].id;
       availableInput.checked = true;
@@ -125,13 +125,13 @@
             <div class="data-row__meta">
               ${escapeHtml(categoryName(item.category_id))}
               &nbsp;·&nbsp;
-              <span class="badge ${item.is_available ? 'badge-success' : 'badge-muted'}">${item.is_available ? 'Available' : 'Unavailable'}</span>
+              <span class="badge ${item.is_available ? 'badge-success' : 'badge-muted'}">${item.is_available ? 'بەردەستە' : 'نەبەردەستە'}</span>
             </div>
           </div>
           <div class="data-row__actions">
-            <button type="button" class="btn btn-ghost" data-action="toggle">${item.is_available ? 'Mark unavailable' : 'Mark available'}</button>
-            <button type="button" class="btn btn-ghost" data-action="edit">Edit</button>
-            <button type="button" class="btn btn-danger" data-action="delete">Delete</button>
+            <button type="button" class="btn btn-ghost" data-action="toggle">${item.is_available ? 'وەک نەبەردەست دیاری بکە' : 'وەک بەردەست دیاری بکە'}</button>
+            <button type="button" class="btn btn-ghost" data-action="edit">دەستکاری</button>
+            <button type="button" class="btn btn-danger" data-action="delete">سڕینەوە</button>
           </div>
         `;
 
@@ -176,16 +176,16 @@
 
   async function handleDelete(item) {
     const ok = await Admin.confirmAction({
-      title: 'Delete item?',
-      message: `"${item.name_ku}" will be permanently deleted. This cannot be undone.`,
-      confirmLabel: 'Delete',
+      title: 'خواردنەوەکە بسڕدرێتەوە؟',
+      message: `"${item.name_ku}" بۆ هەمیشە دەسڕدرێتەوە. ناتوانرێت پاشگەز بکرێتەوە.`,
+      confirmLabel: 'سڕینەوە',
     });
     if (!ok) return;
 
     try {
       const { error } = await window.sb.from('menu_items').delete().eq('id', item.id);
       if (error) throw error;
-      Admin.toast('Item deleted.');
+      Admin.toast('خواردنەوەکە سڕایەوە.');
       await loadData();
     } catch (err) {
       Admin.toast(Admin.friendlyError(err), 'error');
@@ -204,21 +204,21 @@
 
     let hasError = false;
     if (!nameKu) {
-      nameKuError.textContent = 'Kurdish name is required.';
+      nameKuError.textContent = 'ناوی کوردی پێویستە.';
       hasError = true;
     }
     if (!categoryId) {
-      categoryError.textContent = 'Please choose a category.';
+      categoryError.textContent = 'تکایە بەشێک هەڵبژێرە.';
       hasError = true;
     }
     if (isNaN(price) || price < 0) {
-      priceError.textContent = 'Enter a valid price.';
+      priceError.textContent = 'نرخێکی دروست بنووسە.';
       hasError = true;
     }
     if (hasError) return;
 
     saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving...';
+    saveBtn.textContent = 'پاشەکەوتکردن...';
 
     try {
       let imageUrl = existingImageUrl;
@@ -243,14 +243,14 @@
       if (id) {
         const { error } = await window.sb.from('menu_items').update(payload).eq('id', id);
         if (error) throw error;
-        Admin.toast('Item updated.');
+        Admin.toast('خواردنەوەکە نوێکرایەوە.');
       } else {
         const maxOrder = items
           .filter((it) => it.category_id === categoryId)
           .reduce((max, it) => Math.max(max, it.sort_order), 0);
         const { error } = await window.sb.from('menu_items').insert({ ...payload, sort_order: maxOrder + 1 });
         if (error) throw error;
-        Admin.toast('Item added.');
+        Admin.toast('خواردنەوەکە زیادکرا.');
       }
 
       closeModal();
@@ -259,7 +259,7 @@
       Admin.toast(Admin.friendlyError(err), 'error');
     } finally {
       saveBtn.disabled = false;
-      saveBtn.textContent = 'Save';
+      saveBtn.textContent = 'پاشەکەوتکردن';
     }
   });
 

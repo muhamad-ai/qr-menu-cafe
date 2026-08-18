@@ -72,12 +72,12 @@
 
     const nameKu = cafeNameKu.value.trim();
     if (!nameKu) {
-      cafeNameKuError.textContent = 'Kurdish café name is required.';
+      cafeNameKuError.textContent = 'ناوی کوردی کافێ پێویستە.';
       return;
     }
 
     saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving...';
+    saveBtn.textContent = 'پاشەکەوتکردن...';
 
     try {
       let logoUrl = existingLogoUrl;
@@ -106,14 +106,14 @@
       const { error } = await window.sb.from('settings').update(payload).eq('id', 1);
       if (error) throw error;
 
-      Admin.toast('Settings saved.');
+      Admin.toast('ڕێکخستنەکان پاشەکەوتکران.');
       pendingLogoFile = null;
       pendingBackgroundFile = null;
     } catch (err) {
       Admin.toast(Admin.friendlyError(err), 'error');
     } finally {
       saveBtn.disabled = false;
-      saveBtn.textContent = 'Save settings';
+      saveBtn.textContent = 'پاشەکەوتکردنی ڕێکخستنەکان';
     }
   });
 

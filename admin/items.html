@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ku" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>Menu Items — Admin Dashboard</title>
+  <title>خواردنەوەکان — بەڕێوەبردنی مێنیو</title>
   <link rel="icon" href="data:," />
   <link rel="stylesheet" href="../assets/css/admin.css" />
 </head>
@@ -14,23 +14,23 @@
     <div class="main-area">
       <header class="topbar">
         <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
-        <h1>Menu Items</h1>
+        <h1>خواردنەوەکان</h1>
         <div></div>
       </header>
 
       <div class="page">
         <div class="panel">
           <div class="panel__header">
-            <h2>All items</h2>
+            <h2>هەموو خواردنەوەکان</h2>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
               <select id="filterCategory" class="field" style="padding:8px 10px;border:1px solid var(--a-border);border-radius:8px;">
-                <option value="all">All categories</option>
+                <option value="all">هەموو بەشەکان</option>
               </select>
-              <button type="button" class="btn" id="addItemBtn">+ Add item</button>
+              <button type="button" class="btn" id="addItemBtn">+ زیادکردنی خواردنەوە</button>
             </div>
           </div>
           <div id="itemsList" class="data-list"></div>
-          <div id="itemsEmpty" class="empty-state" hidden>No items yet. Add your first one.</div>
+          <div id="itemsEmpty" class="empty-state" hidden>هێشتا هیچ خواردنەوەیەک زیاد نەکراوە. یەکەمینی زیاد بکە.</div>
         </div>
       </div>
     </div>
@@ -39,62 +39,62 @@
   <!-- Add/Edit modal -->
   <div class="modal-backdrop" id="itemModal" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="itemModalTitle">
-      <h2 id="itemModalTitle">Add item</h2>
+      <h2 id="itemModalTitle">زیادکردنی خواردنەوە</h2>
       <form id="itemForm" novalidate>
         <input type="hidden" id="itemId" />
 
         <div class="field">
-          <label for="itemCategory">Category *</label>
+          <label for="itemCategory">بەش *</label>
           <select id="itemCategory" required></select>
           <div class="field-error" id="itemCategoryError"></div>
         </div>
 
         <div class="field">
-          <label for="itemNameKu">Name (Kurdish) *</label>
+          <label for="itemNameKu">ناو (کوردی) *</label>
           <input type="text" id="itemNameKu" required />
           <div class="field-error" id="itemNameKuError"></div>
         </div>
         <div class="field">
-          <label for="itemNameAr">Name (Arabic)</label>
+          <label for="itemNameAr">ناو (عەرەبی)</label>
           <input type="text" id="itemNameAr" />
         </div>
         <div class="field">
-          <label for="itemNameEn">Name (English)</label>
+          <label for="itemNameEn">ناو (ئینگلیزی)</label>
           <input type="text" id="itemNameEn" />
         </div>
 
         <div class="field">
-          <label for="itemDescKu">Description (Kurdish)</label>
+          <label for="itemDescKu">وردەکاری (کوردی)</label>
           <textarea id="itemDescKu" rows="2"></textarea>
         </div>
         <div class="field">
-          <label for="itemDescAr">Description (Arabic)</label>
+          <label for="itemDescAr">وردەکاری (عەرەبی)</label>
           <textarea id="itemDescAr" rows="2"></textarea>
         </div>
         <div class="field">
-          <label for="itemDescEn">Description (English)</label>
+          <label for="itemDescEn">وردەکاری (ئینگلیزی)</label>
           <textarea id="itemDescEn" rows="2"></textarea>
         </div>
 
         <div class="field">
-          <label for="itemPrice">Price *</label>
+          <label for="itemPrice">نرخ *</label>
           <input type="number" id="itemPrice" min="0" step="0.01" required />
           <div class="field-error" id="itemPriceError"></div>
         </div>
 
         <div class="field">
-          <label for="itemImage">Photo</label>
+          <label for="itemImage">وێنە</label>
           <input type="file" id="itemImage" accept="image/*" />
-          <img id="itemImagePreview" class="image-preview" hidden alt="Preview" />
+          <img id="itemImagePreview" class="image-preview" hidden alt="پێشبینین" />
         </div>
 
         <div class="field">
-          <label><input type="checkbox" id="itemAvailable" checked /> Available</label>
+          <label><input type="checkbox" id="itemAvailable" checked /> بەردەستە</label>
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="btn btn-ghost" id="itemCancelBtn">Cancel</button>
-          <button type="submit" class="btn" id="itemSaveBtn">Save</button>
+          <button type="button" class="btn btn-ghost" id="itemCancelBtn">پاشگەزبوونەوە</button>
+          <button type="submit" class="btn" id="itemSaveBtn">پاشەکەوتکردن</button>
         </div>
       </form>
     </div>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ku" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>Settings — Admin Dashboard</title>
+  <title>ڕێکخستنەکان — بەڕێوەبردنی مێنیو</title>
   <link rel="icon" href="data:," />
   <link rel="stylesheet" href="../assets/css/admin.css" />
 </head>
@@ -14,76 +14,76 @@
     <div class="main-area">
       <header class="topbar">
         <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
-        <h1>Settings</h1>
+        <h1>ڕێکخستنەکان</h1>
         <div></div>
       </header>
 
       <div class="page">
         <form id="settingsForm" novalidate>
           <div class="panel">
-            <div class="panel__header"><h2>Café name</h2></div>
+            <div class="panel__header"><h2>ناوی کافێ</h2></div>
             <div class="field">
-              <label for="cafeNameKu">Kurdish *</label>
+              <label for="cafeNameKu">کوردی *</label>
               <input type="text" id="cafeNameKu" required />
               <div class="field-error" id="cafeNameKuError"></div>
             </div>
             <div class="field">
-              <label for="cafeNameAr">Arabic</label>
+              <label for="cafeNameAr">عەرەبی</label>
               <input type="text" id="cafeNameAr" />
             </div>
             <div class="field">
-              <label for="cafeNameEn">English</label>
+              <label for="cafeNameEn">ئینگلیزی</label>
               <input type="text" id="cafeNameEn" />
             </div>
           </div>
 
           <div class="panel">
-            <div class="panel__header"><h2>Branding</h2></div>
+            <div class="panel__header"><h2>لۆگۆ و وێنە</h2></div>
             <div class="field">
-              <label for="logoInput">Logo</label>
+              <label for="logoInput">لۆگۆ</label>
               <input type="file" id="logoInput" accept="image/*" />
-              <img id="logoPreview" class="image-preview" hidden alt="Logo preview" />
+              <img id="logoPreview" class="image-preview" hidden alt="پێشبینینی لۆگۆ" />
             </div>
             <div class="field">
-              <label for="backgroundInput">Background image</label>
+              <label for="backgroundInput">وێنەی پاشبنەما</label>
               <input type="file" id="backgroundInput" accept="image/*" />
-              <img id="backgroundPreview" class="image-preview" hidden alt="Background preview" />
+              <img id="backgroundPreview" class="image-preview" hidden alt="پێشبینینی پاشبنەما" />
             </div>
           </div>
 
           <div class="panel">
-            <div class="panel__header"><h2>Theme colors</h2></div>
+            <div class="panel__header"><h2>ڕەنگی Theme</h2></div>
             <div class="field">
-              <label for="themePrimary">Primary color</label>
+              <label for="themePrimary">ڕەنگی سەرەکی</label>
               <input type="color" id="themePrimary" value="#1f1410" />
             </div>
             <div class="field">
-              <label for="themeSecondary">Accent color</label>
+              <label for="themeSecondary">ڕەنگی لاوەکی</label>
               <input type="color" id="themeSecondary" value="#c9a15a" />
             </div>
           </div>
 
           <div class="panel">
-            <div class="panel__header"><h2>Currency & language</h2></div>
+            <div class="panel__header"><h2>دراو و زمان</h2></div>
             <div class="field">
-              <label for="currencyCode">Currency code (e.g. IQD, USD)</label>
+              <label for="currencyCode">کۆدی دراو (بۆ نموونە IQD, USD)</label>
               <input type="text" id="currencyCode" maxlength="8" />
             </div>
             <div class="field">
-              <label for="currencySymbol">Currency symbol shown on menu (e.g. د.ع, $)</label>
+              <label for="currencySymbol">هێمای دراو کە لە مێنیو دەردەکەوێت (بۆ نموونە د.ع, $)</label>
               <input type="text" id="currencySymbol" maxlength="8" />
             </div>
             <div class="field">
-              <label for="defaultLanguage">Default menu language</label>
+              <label for="defaultLanguage">زمانی بنەڕەتی مێنیو</label>
               <select id="defaultLanguage">
-                <option value="ku">Kurdish (سۆرانی)</option>
-                <option value="ar">Arabic (العربية)</option>
-                <option value="en">English</option>
+                <option value="ku">کوردی (سۆرانی)</option>
+                <option value="ar">عەرەبی (العربية)</option>
+                <option value="en">ئینگلیزی (English)</option>
               </select>
             </div>
           </div>
 
-          <button type="submit" class="btn" id="settingsSaveBtn">Save settings</button>
+          <button type="submit" class="btn" id="settingsSaveBtn">پاشەکەوتکردنی ڕێکخستنەکان</button>
         </form>
       </div>
     </div>

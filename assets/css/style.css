@@ -24,6 +24,9 @@
   box-sizing: border-box;
 }
 
+/* Must win over any `.class { display: ... }` rule below (e.g. .state-block
+   uses display:flex) — otherwise elements JS hides via the `hidden`
+   attribute stay visible whenever a class also sets their `display`. */
 [hidden] {
   display: none !important;
 }

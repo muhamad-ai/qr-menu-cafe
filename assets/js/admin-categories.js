@@ -18,14 +18,14 @@
     form.reset();
     nameKuError.textContent = '';
     if (category) {
-      modalTitle.textContent = 'Edit category';
+      modalTitle.textContent = 'دەستکاریکردنی بەش';
       idInput.value = category.id;
       nameKuInput.value = category.name_ku || '';
       nameArInput.value = category.name_ar || '';
       nameEnInput.value = category.name_en || '';
       isActiveInput.checked = !!category.is_active;
     } else {
-      modalTitle.textContent = 'Add category';
+      modalTitle.textContent = 'زیادکردنی بەش';
       idInput.value = '';
       isActiveInput.checked = true;
     }
@@ -49,20 +49,20 @@
         row.className = 'data-row';
         row.innerHTML = `
           <div class="sort-controls">
-            <button type="button" data-action="up" ${index === 0 ? 'disabled' : ''} aria-label="Move up">▲</button>
-            <button type="button" data-action="down" ${index === categories.length - 1 ? 'disabled' : ''} aria-label="Move down">▼</button>
+            <button type="button" data-action="up" ${index === 0 ? 'disabled' : ''} aria-label="بردنە سەرەوە">▲</button>
+            <button type="button" data-action="down" ${index === categories.length - 1 ? 'disabled' : ''} aria-label="بردنە خوارەوە">▼</button>
           </div>
           <div class="data-row__main">
             <div class="data-row__title">${escapeHtml(cat.name_ku)}</div>
             <div class="data-row__meta">
               ${escapeHtml(cat.name_en || '')} ${cat.name_ar ? '· ' + escapeHtml(cat.name_ar) : ''}
               &nbsp;·&nbsp;
-              <span class="badge ${cat.is_active ? 'badge-success' : 'badge-muted'}">${cat.is_active ? 'Visible' : 'Hidden'}</span>
+              <span class="badge ${cat.is_active ? 'badge-success' : 'badge-muted'}">${cat.is_active ? 'دیارە' : 'شاراوەیە'}</span>
             </div>
           </div>
           <div class="data-row__actions">
-            <button type="button" class="btn btn-ghost" data-action="edit">Edit</button>
-            <button type="button" class="btn btn-danger" data-action="delete">Delete</button>
+            <button type="button" class="btn btn-ghost" data-action="edit">دەستکاری</button>
+            <button type="button" class="btn btn-danger" data-action="delete">سڕینەوە</button>
           </div>
         `;
 
@@ -113,16 +113,16 @@
 
   async function handleDelete(cat) {
     const ok = await Admin.confirmAction({
-      title: 'Delete category?',
-      message: `"${cat.name_ku}" and all of its menu items will be permanently deleted. This cannot be undone.`,
-      confirmLabel: 'Delete',
+      title: 'بەشەکە بسڕدرێتەوە؟',
+      message: `"${cat.name_ku}" و هەموو خواردنەوەکانی ناوی بۆ هەمیشە دەسڕدرێنەوە. ناتوانرێت پاشگەز بکرێتەوە.`,
+      confirmLabel: 'سڕینەوە',
     });
     if (!ok) return;
 
     try {
       const { error } = await window.sb.from('categories').delete().eq('id', cat.id);
       if (error) throw error;
-      Admin.toast('Category deleted.');
+      Admin.toast('بەشەکە سڕایەوە.');
       await loadCategories();
     } catch (err) {
       Admin.toast(Admin.friendlyError(err), 'error');
@@ -135,7 +135,7 @@
 
     const nameKu = nameKuInput.value.trim();
     if (!nameKu) {
-      nameKuError.textContent = 'Kurdish name is required.';
+      nameKuError.textContent = 'ناوی کوردی پێویستە.';
       return;
     }
 
@@ -147,21 +147,21 @@
     };
 
     saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving...';
+    saveBtn.textContent = 'پاشەکەوتکردن...';
 
     try {
       const id = idInput.value;
       if (id) {
         const { error } = await window.sb.from('categories').update(payload).eq('id', id);
         if (error) throw error;
-        Admin.toast('Category updated.');
+        Admin.toast('بەشەکە نوێکرایەوە.');
       } else {
         const maxOrder = categories.reduce((max, c) => Math.max(max, c.sort_order), 0);
         const { error } = await window.sb
           .from('categories')
           .insert({ ...payload, sort_order: maxOrder + 1 });
         if (error) throw error;
-        Admin.toast('Category added.');
+        Admin.toast('بەشەکە زیادکرا.');
       }
       closeModal();
       await loadCategories();
@@ -169,7 +169,7 @@
       Admin.toast(Admin.friendlyError(err), 'error');
     } finally {
       saveBtn.disabled = false;
-      saveBtn.textContent = 'Save';
+      saveBtn.textContent = 'پاشەکەوتکردن';
     }
   });
 

@@ -20,6 +20,9 @@
   box-sizing: border-box;
 }
 
+/* Safety net: make sure the `hidden` attribute always wins over any class
+   that sets `display`, so JS show/hide logic can never be silently
+   overridden by CSS elsewhere on the page. */
 [hidden] {
   display: none !important;
 }

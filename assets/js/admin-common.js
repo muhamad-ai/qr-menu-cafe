@@ -43,10 +43,10 @@ const Admin = (function () {
   }
 
   const NAV_ITEMS = [
-    { page: 'dashboard.html', label: 'Overview' },
-    { page: 'categories.html', label: 'Categories' },
-    { page: 'items.html', label: 'Menu Items' },
-    { page: 'settings.html', label: 'Settings' },
+    { page: 'dashboard.html', label: 'گشتی' },
+    { page: 'categories.html', label: 'بەشەکان' },
+    { page: 'items.html', label: 'خواردنەوەکان' },
+    { page: 'settings.html', label: 'ڕێکخستنەکان' },
   ];
 
   function initShell() {
@@ -60,11 +60,11 @@ const Admin = (function () {
       ).join('');
 
       sidebar.innerHTML = `
-        <div class="sidebar__brand">☕ Menu Admin</div>
+        <div class="sidebar__brand">☕ بەڕێوەبردنی مێنیو</div>
         ${links}
         <div class="sidebar__footer">
           <div id="currentUserLabel" style="font-size:0.78rem;opacity:0.75;margin-bottom:8px;"></div>
-          <button id="logoutBtn" class="btn btn-secondary btn-block" type="button">Log out</button>
+          <button id="logoutBtn" class="btn btn-secondary btn-block" type="button">دەرچوون</button>
         </div>
       `;
     }
@@ -108,7 +108,7 @@ const Admin = (function () {
     setTimeout(() => el.remove(), duration);
   }
 
-  function confirmAction({ title, message, confirmLabel = 'Delete', danger = true }) {
+  function confirmAction({ title, message, confirmLabel = 'سڕینەوە', danger = true }) {
     return new Promise((resolve) => {
       const backdrop = document.createElement('div');
       backdrop.className = 'modal-backdrop';
@@ -117,7 +117,7 @@ const Admin = (function () {
           <h2 id="confirmTitle">${title}</h2>
           <p>${message}</p>
           <div class="modal-actions">
-            <button type="button" class="btn btn-ghost" data-action="cancel">Cancel</button>
+            <button type="button" class="btn btn-ghost" data-action="cancel">پاشگەزبوونەوە</button>
             <button type="button" class="btn ${danger ? 'btn-danger' : ''}" data-action="confirm">${confirmLabel}</button>
           </div>
         </div>

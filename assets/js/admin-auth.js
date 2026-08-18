@@ -10,7 +10,7 @@
 
   const params = new URLSearchParams(location.search);
   if (params.get('reason') === 'not_authorized') {
-    showError('This account is not authorized to access the dashboard. Contact the café owner.');
+    showError('ئەم هەژمارە ڕێگەپێدراو نییە بۆ چوونەژوورەوەی dashboard. پەیوەندی بە خاوەنی کافێکە بکە.');
   }
 
   function showError(message) {
@@ -41,12 +41,12 @@
     const password = passwordInput.value;
 
     if (!email || !password) {
-      showError('Please enter both email and password.');
+      showError('تکایە ئیمەیل و تێپەڕەوشە هەردووکیان بنووسە.');
       return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Signing in...';
+    submitBtn.textContent = 'چوونەژوورەوە...';
 
     try {
       const { data, error } = await window.sb.auth.signInWithPassword({ email, password });
@@ -60,16 +60,16 @@
 
       if (adminErr || !adminRow) {
         await window.sb.auth.signOut();
-        showError('This account is not authorized to access the dashboard.');
+        showError('ئەم هەژمارە ڕێگەپێدراو نییە بۆ چوونەژوورەوەی dashboard.');
         return;
       }
 
       location.href = 'dashboard.html';
     } catch (err) {
-      showError(err.message || 'Sign in failed. Check your email and password.');
+      showError(err.message || 'چوونەژوورەوە سەرنەکەوت. ئیمەیل و تێپەڕەوشەکەت بپشکنە.');
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Sign in';
+      submitBtn.textContent = 'چوونەژوورەوە';
     }
   });
 
