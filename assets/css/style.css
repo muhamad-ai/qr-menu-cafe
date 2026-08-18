@@ -392,24 +392,24 @@ a {
 .menu-item {
   display: flex;
   gap: 12px;
-  /* Real frosted glass rather than an almost-solid white card: low-opacity
-     tint + strong blur/saturate so the café photo genuinely reads through,
-     plus a soft inset highlight along the top edge for that glass-panel
-     look. The blur keeps whatever busy photo detail is behind it smoothed
-     out, so name/price/description stay easily readable. */
-  background: rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(10px) saturate(190%);
-  -webkit-backdrop-filter: blur(10px) saturate(190%);
+  /* The outer card is now almost fully transparent — just a thin outline
+     floating over the photo — so the photo itself stays crisp and
+     visible instead of being washed under a pale tint. Legibility comes
+     from the small solid chip on .menu-item__body below (see comment
+     there), not from tinting this whole row. */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border-radius: var(--radius-lg);
-  padding: 12px;
-  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  box-shadow: var(--shadow-card);
   border: 1px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
   transition: background 0.15s ease, transform 0.12s ease;
 }
 
 .menu-item:hover {
-  background: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .menu-item:active {
@@ -454,6 +454,16 @@ a {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  /* This is the part that actually needs to stay crisp: a small, mostly
+     solid chip behind just the name/description/price, rather than
+     tinting the whole card. Keeps text sharp no matter how busy the
+     photo is here, while the rest of the card (and the photo thumbnail)
+     stays untouched. */
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
 }
 
 .menu-item__top {
@@ -467,10 +477,6 @@ a {
   font-weight: 700;
   font-size: 1rem;
   color: var(--text-main);
-  /* Now that the card itself is much more see-through, a faint light
-     halo keeps the text readable no matter what part of the photo (or
-     how busy it is) happens to sit behind it. */
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
 }
 
 .menu-item__price {
@@ -478,14 +484,12 @@ a {
   font-size: 0.95rem;
   color: var(--theme-primary);
   white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
 }
 
 .menu-item__desc {
   font-size: 0.85rem;
   color: var(--text-muted);
   margin: 0;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
