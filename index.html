@@ -2,7 +2,10 @@
 <html lang="ku" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+  />
   <title>Menu</title>
   <meta name="description" content="Digital café menu — browse categories, dishes and prices." />
   <meta name="robots" content="index,follow" />
@@ -69,6 +72,23 @@
   <footer class="menu-footer">
     <span id="footerText"></span>
   </footer>
+
+  <!-- View-only item detail modal: bigger photo + full description. No
+       ordering/quantity/cart controls — purely for looking closer. -->
+  <div class="item-modal-backdrop" id="itemModalBackdrop" hidden>
+    <div class="item-modal" role="dialog" aria-modal="true" aria-labelledby="itemModalName">
+      <button type="button" class="item-modal__close" id="itemModalClose" aria-label="Close">&times;</button>
+      <div class="item-modal__image-wrap" id="itemModalImageWrap"></div>
+      <div class="item-modal__body">
+        <div class="item-modal__top">
+          <h3 id="itemModalName"></h3>
+          <span id="itemModalPrice" class="item-modal__price"></span>
+        </div>
+        <p id="itemModalDesc" class="item-modal__desc"></p>
+        <span id="itemModalBadge" class="menu-item__badge" hidden></span>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <script src="assets/js/config.js" defer onerror="console.error('Missing assets/js/config.js — copy it from config.example.js')"></script>

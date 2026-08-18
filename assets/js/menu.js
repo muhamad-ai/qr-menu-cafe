@@ -20,6 +20,13 @@
     container: document.getElementById('categoriesContainer'),
     footerText: document.getElementById('footerText'),
     langButtons: document.querySelectorAll('.lang-switch button'),
+    itemModalBackdrop: document.getElementById('itemModalBackdrop'),
+    itemModalClose: document.getElementById('itemModalClose'),
+    itemModalImageWrap: document.getElementById('itemModalImageWrap'),
+    itemModalName: document.getElementById('itemModalName'),
+    itemModalPrice: document.getElementById('itemModalPrice'),
+    itemModalDesc: document.getElementById('itemModalDesc'),
+    itemModalBadge: document.getElementById('itemModalBadge'),
   };
 
   let state = {
@@ -111,6 +118,24 @@
     }
   }
 
+  // Horizontal position (as a %) that the fixed café-photo background pans
+  // to whenever the active tab changes — "All" sits at the left edge of
+  // the range and the last category sits at the right edge, so browsing
+  // through the tabs sweeps the whole photo into view over time instead of
+  // only ever showing whatever landed dead-center.
+  function updateBackgroundPan() {
+    const order = ['all'].concat(
+      state.categories
+        .filter((c) => c.is_active)
+        .sort((a, b) => a.sort_order - b.sort_order)
+        .map((c) => c.id)
+    );
+    const idx = order.indexOf(state.activeCategory);
+    const total = order.length;
+    const pct = total > 1 && idx >= 0 ? (idx / (total - 1)) * 100 : 50;
+    document.documentElement.style.setProperty('--menu-bg-pos-x', pct + '%');
+  }
+
   function renderCategoryTabs() {
     const lang = state.lang;
     els.tabs.innerHTML = '';
@@ -141,6 +166,8 @@
         });
         els.tabs.appendChild(btn);
       });
+
+    updateBackgroundPan();
   }
 
   function itemMatchesSearch(item, lang, term) {
@@ -204,7 +231,66 @@
     }
 
     card.appendChild(body);
+
+    // View-only detail popup: bigger photo + full description. Still no
+    // ordering/cart affordance of any kind, just a closer look.
+    card.setAttribute('role', 'button');
+    card.tabIndex = 0;
+    card.setAttribute('aria-label', localizedField(item, 'name', lang));
+    card.addEventListener('click', () => openItemModal(item, lang));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openItemModal(item, lang);
+      }
+    });
+
     return card;
+  }
+
+  function openItemModal(item, lang) {
+    const name = localizedField(item, 'name', lang);
+    const desc = localizedField(item, 'description', lang);
+
+    els.itemModalName.textContent = name;
+    els.itemModalPrice.textContent = money(item.price, state.settings, lang);
+
+    if (desc) {
+      els.itemModalDesc.textContent = desc;
+      els.itemModalDesc.hidden = false;
+    } else {
+      els.itemModalDesc.textContent = '';
+      els.itemModalDesc.hidden = true;
+    }
+
+    els.itemModalImageWrap.innerHTML = '';
+    if (item.image_url) {
+      els.itemModalImageWrap.classList.remove('item-modal__image-wrap--placeholder');
+      const img = document.createElement('img');
+      img.src = item.image_url;
+      img.alt = name;
+      els.itemModalImageWrap.appendChild(img);
+    } else {
+      els.itemModalImageWrap.classList.add('item-modal__image-wrap--placeholder');
+      els.itemModalImageWrap.textContent = '☕';
+    }
+
+    if (!item.is_available) {
+      els.itemModalBadge.textContent = t('unavailable', lang);
+      els.itemModalBadge.hidden = false;
+    } else {
+      els.itemModalBadge.hidden = true;
+    }
+
+    els.itemModalBackdrop.hidden = false;
+    document.body.classList.add('modal-open');
+    els.itemModalClose.focus();
+  }
+
+  function closeItemModal() {
+    if (els.itemModalBackdrop.hidden) return;
+    els.itemModalBackdrop.hidden = true;
+    document.body.classList.remove('modal-open');
   }
 
   function renderItems() {
@@ -312,8 +398,17 @@
       btn.addEventListener('click', () => {
         state.lang = btn.dataset.lang;
         setStoredLang(state.lang);
+        closeItemModal();
         renderAll();
       });
+    });
+
+    els.itemModalClose.addEventListener('click', closeItemModal);
+    els.itemModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === els.itemModalBackdrop) closeItemModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !els.itemModalBackdrop.hidden) closeItemModal();
     });
 
     fetchData();
